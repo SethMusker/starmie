@@ -158,7 +158,7 @@ loadStructure <- function(filename, logfile=NULL){
 
     #Get burn and non-burn in iterations as seperate data frames.
     ##NOTE: This relies heavily on the current format.
-    intervals <- unlist(lapply(which(grepl("^ Rep#:   Lambda   Alpha.*",l_f)), function(x){ x[1]:(x[1]+11) }))
+    intervals <- unlist(lapply(which(grepl("^\\s+Rep#:   Lambda  *",l_f)), function(x){ x[1]:(x[1]+11) }))
     burn_lines <- l_f[intervals]
     burn_lines <- burn_lines[grepl("[0-9]|R.*", burn_lines)]
     burn_lines <- str_trim(burn_lines)
