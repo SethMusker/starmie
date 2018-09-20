@@ -82,19 +82,24 @@ loadStructure <- function(filename, logfile=NULL){
   avg_dist_df <- data.frame("Cluster"=avg_dist_lines[,1], "Avg.dist"=avg_dist_lines[,2])
 
   #Model fit stats
-  fit_lines <- s_f[(which(grepl("^Estimated Ln.*", s_f))):(which(grepl("^Mean value of Fst_1 .*", s_f))-1)]
+  fit_lines <- s_f[(which(grepl("^Estimated Ln.*", s_f))):(which(
+    (grepl("^Mean value of Fst_1 .*", s_f)|grepl("^Allele frequencies uncorrelated.*", s_f)))-1)]
   fit_lines <- str_trim(fit_lines)
   fit_lines <- str_split_fixed(fit_lines, "= ", n=2)
   fit_lines[,1] <- str_trim(fit_lines[,1])
   fit_stats_df <- data.frame(Statistic=fit_lines[,1], Value=as.numeric(fit_lines[,2]))
 
   #Fst values
-  fst_lines <- s_f[(grep("^Mean value of Fst_1 .*", s_f)):(grep("^Inferred ancestry of.*", s_f)-1)]
-  fst_lines <- str_trim(fst_lines)
-  fst_lines <- str_split_fixed(fst_lines, "= ", n=2)
-  fst_lines[,1] <- str_trim(fst_lines[,1])
-  fst_lines[,1] <- str_replace(fst_lines[,1], "Mean value of Fst_", "")
-  fst_df <- data.frame(Fst.Group=as.numeric(fst_lines[,1]), Value=as.numeric(fst_lines[,2]))
+  if(sum(grep("^Mean value of Fst_1 .*", s_f))==0){
+    fst_df = NULL
+  } else {
+    fst_lines <- s_f[(grep("^Mean value of Fst_1 .*", s_f)):(grep("^Inferred ancestry of.*", s_f)-1)]
+    fst_lines <- str_trim(fst_lines)
+    fst_lines <- str_split_fixed(fst_lines, "= ", n=2)
+    fst_lines[,1] <- str_trim(fst_lines[,1])
+    fst_lines[,1] <- str_replace(fst_lines[,1], "Mean value of Fst_", "")
+    fst_df <- data.frame(Fst.Group=as.numeric(fst_lines[,1]), Value=as.numeric(fst_lines[,2]))
+  }
 
   #Inferred ancestry individuals
   ances_lines <- s_f[(grep("^Inferred ancestry of.*", s_f)+1):(grep("^Estimated Allele Frequencies .*", s_f)-1)]
@@ -127,17 +132,31 @@ loadStructure <- function(filename, logfile=NULL){
   colnames(ancest_df)[(split_n+1):ncol(ancest_df)] <- paste("Cluster", seq(1,ncol(ancest_matrix)))
 
   #Cluster allele frequencies
-  clust_allel_lines <- s_f[(grep("^First column gives.*", s_f)+1):(grep("^Values of parameters used.*", s_f)-1)]
-  pos <- grep("^Locus .*", clust_allel_lines)
-  clust_allel_lines <- gsub("[()%]", "", clust_allel_lines)
-  clust_allel_lines <- unname(split(clust_allel_lines, cumsum(seq_along(clust_allel_lines) %in% pos)))
-  clust_allele_list <- purrr::map(clust_allel_lines[1:2], function(x){
-    list(Locus=as.numeric(str_split(x[[1]], "\\s+")[[1]][2])
-         , AlleleNumber=as.numeric(str_split(x[[2]], "\\s+")[[1]][1])
-         , MissingDataPercentage=as.numeric(str_split(x[[3]], "\\s+")[[1]][1])
-         , FreqMatrix=apply(str_split_fixed(str_trim(x[4:length(x)]), "\\s+", n=pops+2), 2, as.numeric)
-    )
-  })
+  if(sum(grep("^First column gives estimated ancestral frequencies.*", s_f))!=0){
+    clust_allel_lines <- s_f[(grep("^First column gives.*", s_f)+1):(grep("^Values of parameters used.*", s_f)-1)]
+    pos <- grep("^Locus .*", clust_allel_lines)
+    clust_allel_lines <- gsub("[()%]", "", clust_allel_lines)
+    clust_allel_lines <- unname(split(clust_allel_lines, cumsum(seq_along(clust_allel_lines) %in% pos)))
+    clust_allele_list <- purrr::map(clust_allel_lines[1:2], function(x){
+      list(Locus=as.numeric(str_split(x[[1]], "\\s+")[[1]][2])
+           , AlleleNumber=as.numeric(str_split(x[[2]], "\\s+")[[1]][1])
+           , MissingDataPercentage=as.numeric(str_split(x[[3]], "\\s+")[[1]][1])
+           , FreqMatrix=apply(str_split_fixed(str_trim(x[4:length(x)]), "\\s+", n=pops+2), 2, as.numeric)
+      )
+    })
+  } else {
+    clust_allel_lines <- s_f[(grep("^Estimated Allele Frequencies in each cluster.*", s_f)+1):(grep("^Values of parameters used.*", s_f)-1)]
+    pos <- grep("^Locus .*", clust_allel_lines)
+    clust_allel_lines <- gsub("[()%]", "", clust_allel_lines)
+    clust_allel_lines <- unname(split(clust_allel_lines, cumsum(seq_along(clust_allel_lines) %in% pos)))
+    clust_allele_list <- purrr::map(clust_allel_lines[1:2], function(x){
+      list(Locus=as.numeric(str_split(x[[1]], "\\s+")[[1]][2])
+           , AlleleNumber=as.numeric(str_split(x[[2]], "\\s+")[[1]][1])
+           , MissingDataPercentage=as.numeric(str_split(x[[3]], "\\s+")[[1]][1])
+           , FreqMatrix=apply(str_split_fixed(str_trim(x[4:length(x)]), "\\s+", n=pops+1), 2, as.numeric)
+      )
+    })
+  }
 
   structure_obj$K = pops
   structure_obj$run_params = run_params
