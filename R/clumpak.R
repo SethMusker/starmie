@@ -11,7 +11,7 @@
 #' multiple_runs_k10 <- exampleStructure("mcmc_diagnostics")
 #' Q_list <- lapply(multiple_runs_k10, getQ)
 #' clumpak_results <- clumpak(Q_list)
-clumpak <- function(Q_list, method="none",parallel=FALSE){
+clumpak <- function(Q_list, method="none",parallel=FALSE,iter=100){
 
 
 
@@ -24,9 +24,9 @@ clumpak <- function(Q_list, method="none",parallel=FALSE){
 
   if (method!="none"){
     if(parallel==FALSE){
-    Q_list <- clumpp(Q_list, method)$Q_list
+    Q_list <- clumpp(Q_list, method, iter=iter)$Q_list
       }else{
-    Q_list <- clumpp_future(Q_list, method)$Q_list
+    Q_list <- clumpp_future(Q_list, method, iter=iter)$Q_list
       }
   }
 
