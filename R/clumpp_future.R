@@ -51,4 +51,4 @@ clumpp_future<-function (Q_list, method = "greedy", iter = 100)
   return(Q_list)
   toc()
 }
-environment(my_clumpp) <- asNamespace('starmie')
+environment(clumpp_future) <- asNamespace('starmie')
