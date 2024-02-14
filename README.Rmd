@@ -17,57 +17,21 @@ knitr::opts_chunk$set(
 [![Travis-CI Build Status](https://travis-ci.org/sa-lee/starmie.svg?branch=master)](https://travis-ci.org/sa-lee/starmie)
 [![](http://cranlogs.r-pkg.org/badges/grand-total/starmie?color=brightgreen)](http://cran.rstudio.com/web/packages/starmie/index.html)
 
-# Quick Start
-Construct a barplot for your STRUCTURE/ADMIXTURE output using `starmie` in a few
-lines of code!
-```{r, fig.width =8, fig.height=6, fig.align='center'}
-# install.packages("starmie")
-library(starmie)
-str_output <- system.file("extdata/microsat_testfiles/",  "locprior_K5.out_f", package = "starmie")
-k5_data <- loadStructure(str_output)
-k5_data
-plotBar(k5_data, facet = FALSE)
-```
+# Note on this fork
+I have written a parallelised implementation of clumpp and included it in the clumpak function. It can be activated using the argument `parallel = TRUE`. 
 
-```{r, echo = FALSE}
+This depends on the `future.apply` package. 
 
-intro_rmd <- 'vignettes/using-starmie.Rmd'
+You need `devtools` for installation.
 
-raw_rmd <- readLines(intro_rmd)
-
-# remove yaml 
-yaml_lines <- grep("---", raw_rmd)
-
-# remove appendix (session info)
-appendix <- grep("Appendix", raw_rmd)
-
-compressed_rmd <- raw_rmd[c(-seq(yaml_lines[1], yaml_lines[2], by = 1), 
-                            -seq(appendix, length(raw_rmd)))]
-writeLines(compressed_rmd, "child.Rmd")
-```
-
-```{r, child = 'child.Rmd'}
-```
-
-# Installation
-`starmie` is available as an R package on CRAN
+## Install this fork:
 ```{r, eval = FALSE}
-install.packages("starmie")
+#install.packages(c("devtools","future.apply"))
+devtools::install_github("SethMusker/starmie")
 ```
 
-The development version of `starmie` can be installed with `devtools`
-```{r, eval = FALSE}
-install.packages("devtools")
-
-devtools::install_github("sa-lee/starmie")
-```
-If you would like to also build the vignette with your installation run:
-
-```{r, eval=FALSE}
-devtools::install_github("sa-lee/starmie", build_vignettes = TRUE)
-```
-
-
+# Readme
+Visit sa-lee's repo for the full Readme: https://github.com/sa-lee/starmie
 
 ```{r cleanup, echo=FALSE, include=FALSE}
 if (file.exists("child.Rmd")) {
