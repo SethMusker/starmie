@@ -74,6 +74,8 @@ getClusterAlleleFreqMat.admix <- function(x) {
 getCompleteAlleleFreqMat <- function(x) {
   UseMethod("getCompleteAlleleFreqMat", x)
 }
+
+#' @export
 getCompleteAlleleFreqMat.struct <- function(x) {
   do.call("rbind", lapply(x$clust_allele_list,
                                 function(x) cbind(rep(x$Locus, x$AlleleNumber),
