@@ -1,9 +1,30 @@
+# clumpp_future.R
+# Functions for merging Q matrices from Structure runs.
+
+#' Run the CLUMPP algorithms faster! You'll need to spin up multiple sessions or cores using plan(multisession) or plan(multicore) (the latter won't work on Windows).
+#' @param Q_list A list of of Q matrices.
+#' @param method The algorithm to use to infer the correct permutations. One of 'greedy' or 'greedyLargeK' or 'stephens'
+#' @param iter The number of iterations to use if running either 'greedy' or 'greedyLargeK'
+#' @import iterpc
+#' @import future.apply
+#' @importFrom combinat permn
+#' @importFrom purrr map_dbl
+#' @export
+#' @examples
+#' # use multiple K=3 runs
+#' cl_data <- exampleStructure("clumpp")
+#' print(cl_data)
+#' Q_list <- lapply(cl_data, getQ)
+#' plan(multisession)
+#' clumppy <- clumpp_future(Q_list)
+#' # Alternatively, supply parallel=TRUE to clumpak(). See ?clumpak.
+
 clumpp_future<-function (Q_list, method = "greedy", iter = 100) 
 {
   require(future.apply)
   plan(multisession)
-  require(tictoc)
-  tic()
+  # require(tictoc)
+  # tic()
   if (!(method %in% c("greedy", "greedyLargeK", "stephens"))) {
     stop("Not a valid CLUMPP method, please use on of: 'greedy', 'greedyLargeK' or 'stephens'")
   }
@@ -49,6 +70,10 @@ clumpp_future<-function (Q_list, method = "greedy", iter = 100)
     Q_list <- getStephens(Q_list)
   }
   return(Q_list)
-  toc()
+  # toc()
 }
-environment(clumpp_future) <- asNamespace('starmie')
+
+G <- function(Q_1, Q_2){
+  W <- matrix(1, nrow(Q_1), ncol(Q_1))/ncol(Q_1)
+  1-norm(Q_1-Q_2, type="F")/sqrt(norm(Q_1-W, type="F")*norm(Q_2-W, type="F"))
+}

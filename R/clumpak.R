@@ -1,9 +1,13 @@
 # clumpak.R
 # Function for inferring modes within multiple structure runs.
 
-#' Run the CLUMPP algorithms.
+#' Run the CLUMPP algorithms. 
+#' If you want to run in parallel, you'll need to spin up multiple sessions or cores using plan(multisession) or plan(multicore) (the latter won't work on Windows).
 #' @param Q_list A list of of Q matrices.
 #' @param method The method the algorithm uses to infer the correct permutations. One of 'greedy' or 'greedyLargeK' or 'stephens' or 'none'
+#' @param iter The number of iterations to use if running either 'greedy' or 'greedyLargeK'.
+#' @param parallel Use future.apply to parallelise clumpp?  
+#' @import future.apply
 #' @importFrom proxy simil
 #' @export
 #' @examples
@@ -11,9 +15,10 @@
 #' multiple_runs_k10 <- exampleStructure("mcmc_diagnostics")
 #' Q_list <- lapply(multiple_runs_k10, getQ)
 #' clumpak_results <- clumpak(Q_list)
-clumpak <- function(Q_list, method="none",parallel=FALSE,iter=100){
-
-
+#' plan(multisession,workers=4)
+#' clumpak_results_parallel <- clumpak(Q_list, parallel=TRUE)
+#' plan(sequential) # it's usually a good idea to go back to sequential to avoid zombie processes.
+clumpak <- function(Q_list, method="none", parallel=FALSE, iter=100){
 
   # i/o checks
   if (!(method %in% c("greedy", "greedyLargeK", "stephens", "none"))) {
