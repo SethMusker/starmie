@@ -29,4 +29,3 @@ an admix object which is a list with 6 elements:
 \description{
 Constructor for admix object
 }
-

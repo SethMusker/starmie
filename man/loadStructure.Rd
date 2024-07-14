@@ -25,4 +25,3 @@ k10_data
 k10_data <- loadStructure(k10_r1, k10_log)
 k10_data
 }
-

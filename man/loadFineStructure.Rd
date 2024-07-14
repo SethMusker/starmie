@@ -4,8 +4,13 @@
 \alias{loadFineStructure}
 \title{Read fineSTRUCTURE Output}
 \usage{
-loadFineStructure(chunkfile, treefile, mcmcfile, meancoincidencefile = NULL,
-  mappopchunkfile = NULL)
+loadFineStructure(
+  chunkfile,
+  treefile,
+  mcmcfile,
+  meancoincidencefile = NULL,
+  mappopchunkfile = NULL
+)
 }
 \arguments{
 \item{chunkfile}{a string containing a chunk counts file produce by fineStructure}
@@ -31,4 +36,3 @@ mappopchunkfile <- system.file("extdata/fine_structure_files", "EastAsiaSimple.E
 fineData <- loadFineStructure(chunkfile, treefile, mcmcfile, meancoincidencefile, mappopchunkfile)
 fineData
 }
-

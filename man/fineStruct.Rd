@@ -25,4 +25,3 @@ an fineStruct object which is a list with 3 elements:
 \description{
 Constructor for fineStruct object
 }
-

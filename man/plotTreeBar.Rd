@@ -29,4 +29,3 @@ plotTreeBar(k6_data, facet = FALSE)
 k3_data <- exampleAdmixture()[[3]]
 plotTreeBar(k3_data)
 }
-

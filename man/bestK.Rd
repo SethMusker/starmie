@@ -46,4 +46,3 @@ structure_results[max_Lk,]
 multi_K_admix <- exampleAdmixture()
 bestK(multi_K_admix)
 }
-

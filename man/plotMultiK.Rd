@@ -21,4 +21,3 @@ cluster_runs <- exampleStructure("multiple_runs")
 # Generate barplot
 plotMultiK(cluster_runs[3:5])
 }
-

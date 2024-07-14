@@ -35,4 +35,3 @@ plotBar(k6_data, pops, facet = FALSE)
 k3_data <- exampleAdmixture()[[3]]
 plotBar(k3_data)
 }
-

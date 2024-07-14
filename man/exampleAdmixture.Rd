@@ -9,4 +9,3 @@ exampleAdmixture()
 \description{
 Example admixture runs
 }
-

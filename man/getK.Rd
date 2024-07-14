@@ -14,4 +14,3 @@ getK(x)
 Retrieve the assumed number of populations from \code{\link{struct}} or
 \code{\link{admix}} objects.
 }
-

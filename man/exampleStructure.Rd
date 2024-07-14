@@ -13,4 +13,3 @@ exampleStructure(example_type)
 \description{
 load structure objects for different starmie functions
 }
-

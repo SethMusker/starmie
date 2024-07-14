@@ -32,4 +32,3 @@ print(multiple_runs_k10)
 results <- plotMCMC(multiple_runs_k10, plot = TRUE)
 single_run <- plotMCMC(multiple_runs_k10[[1]])
 }
-

@@ -15,4 +15,3 @@ an admixList object
 \description{
 Collect many  \code{\link{admix}} objects
 }
-

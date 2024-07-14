@@ -4,8 +4,16 @@
 \alias{runStructure}
 \title{Run STRUCTURE in current path}
 \usage{
-runStructure(path_to_structure, input_file, main_params, extra_params,
-  out_prefix, n_K, n_replicates, n_cores)
+runStructure(
+  path_to_structure,
+  input_file,
+  main_params,
+  extra_params,
+  out_prefix,
+  n_K,
+  n_replicates,
+  n_cores
+)
 }
 \arguments{
 \item{path_to_structure}{path to structure binary executable (ie. /usr/bin/structure)}
@@ -39,4 +47,3 @@ extra_params <-  system.file("inst/extdata/microsat_testfiles", "extraparams", p
 runStructure("structure", input_file, main_params, extra_params, "test", 5, 2, 2)
 }
 }
-

@@ -23,4 +23,3 @@ print(cl_data)
 Q_list <- lapply(cl_data, getQ)
 clumppy <- clumpp(Q_list)
 }
-

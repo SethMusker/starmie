@@ -12,4 +12,3 @@ getQ(x)
 \description{
 Retrieve Q matrix from \code{\link{struct}} or \code{\link{admix}} objects.
 }
-

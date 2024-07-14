@@ -12,4 +12,3 @@ getCompleteAlleleFreqMat(x)
 \description{
 Retrieve estimated population allele frequencies
 }
-

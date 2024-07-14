@@ -4,8 +4,13 @@
 \alias{plotPWCoancestry}
 \title{fineSTRUCTURE pairwise coancestry plot}
 \usage{
-plotPWCoancestry(x, cex = 0.5, colours = NULL, keep_ones = FALSE,
-  max_coancestry = NULL)
+plotPWCoancestry(
+  x,
+  cex = 0.5,
+  colours = NULL,
+  keep_ones = FALSE,
+  max_coancestry = NULL
+)
 }
 \arguments{
 \item{x}{a \code{\link{fineStruct}} object}
@@ -31,4 +36,3 @@ mappopchunkfile <- system.file("extdata/fine_structure_files", "EastAsiaSimple.E
 fineData <- loadFineStructure(chunkfile, treefile, mcmcfile, meancoincidencefile, mappopchunkfile)
 plotPWCoancestry(fineData, max_coancestry=500)
 }
-

@@ -13,4 +13,3 @@ structList(...)
 the structList class is a conatainer for storing a collection
 of struct objects.
 }
-

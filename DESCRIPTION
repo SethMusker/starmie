@@ -38,5 +38,5 @@ Suggests:
     phytools
 URL: https://github.com/sa-lee/starmie
 BugReports: https://github.com/sa-lee/starmie/issues
-RoxygenNote: 5.0.1
+RoxygenNote: 7.3.2
 VignetteBuilder: knitr

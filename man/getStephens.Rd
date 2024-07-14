@@ -12,4 +12,3 @@ getStephens(Q_list)
 \description{
 Use the Stephen's method to permute sample labels
 }
-

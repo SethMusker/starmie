@@ -42,4 +42,3 @@ The \code{\link{struct}} object is a list with 11 elements:
 
 \code{\link{structList}} for manipulating multiple struct objects
 }
-

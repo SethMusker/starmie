@@ -4,8 +4,13 @@
 \alias{loadAdmixture}
 \title{Read Admixture Output}
 \usage{
-loadAdmixture(qfile, pfile, logfile = NULL, bootstrap_bias = NULL,
-  bootstrap_se = NULL)
+loadAdmixture(
+  qfile,
+  pfile,
+  logfile = NULL,
+  bootstrap_bias = NULL,
+  bootstrap_se = NULL
+)
 }
 \arguments{
 \item{qfile}{a valid Q file from ADMIXTURE}
@@ -32,4 +37,3 @@ my_admix <- loadAdmixture(qfin, pfin)
 logfin <- system.file("extdata/hapmap3_files", "log2.out", package = "starmie")
 my_admix <- loadAdmixture(qfin, pfin, logfile = logfin)
 }
-

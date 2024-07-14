@@ -18,4 +18,3 @@ multiple_runs_k10 <- exampleStructure("mcmc_diagnostics")
 Q_list <- lapply(multiple_runs_k10, getQ)
 avgQ <- averageQ(Q_list)
 }
-

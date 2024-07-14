@@ -16,4 +16,3 @@ simulateQ(n, alpha, r)
 \description{
 Simulate random Q-matrix and permutations with replications
 }
-

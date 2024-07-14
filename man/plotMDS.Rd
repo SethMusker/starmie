@@ -32,4 +32,3 @@ plotMDS(k6_data, method = "jsd")
 k3_data <- exampleAdmixture()[[3]]
 plotMDS(k3_data)
 }
-

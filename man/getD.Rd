@@ -2,9 +2,9 @@
 % Please edit documentation in R/struct.R
 \name{getD}
 \alias{getD}
+\alias{getPosterior}
 \alias{getFitStats}
 \alias{getMCMC}
-\alias{getPosterior}
 \title{Accessor methods for struct objects}
 \usage{
 getD(structure_obj)
@@ -23,10 +23,10 @@ getD Return the number of free parameters in STRUCTURE model
 }
 \section{Functions}{
 \itemize{
-\item \code{getPosterior}: Return the estimated log posterior probability (L_k) from a \code{\link{struct}} object
+\item \code{getPosterior()}: Return the estimated log posterior probability (L_k) from a \code{\link{struct}} object
 
-\item \code{getFitStats}: Return the estimated mean and variance of estimated log-likelihood from a \code{\link{struct}} object
+\item \code{getFitStats()}: Return the estimated mean and variance of estimated log-likelihood from a \code{\link{struct}} object
 
-\item \code{getMCMC}: Return non-burn in MCMC iterations.
+\item \code{getMCMC()}: Return non-burn in MCMC iterations.
+
 }}
-

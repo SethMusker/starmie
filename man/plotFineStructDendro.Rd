@@ -24,4 +24,3 @@ mcmcfile <- system.file("extdata/fine_structure_files", "EastAsiaSimple.EMlinked
 fineData <- loadFineStructure(chunkfile, treefile, mcmcfile)
 plotFineStructDendro(fineData)
 }
-

@@ -12,4 +12,3 @@ getClusterAlleleFreqMat(x)
 \description{
 Retrieve estimated within-cluster allele frequencies
 }
-

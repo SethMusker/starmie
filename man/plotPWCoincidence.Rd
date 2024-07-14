@@ -28,4 +28,3 @@ mappopchunkfile <- system.file("extdata/fine_structure_files", "EastAsiaSimple.E
 fineData <- loadFineStructure(chunkfile, treefile, mcmcfile, meancoincidencefile, mappopchunkfile)
 plotPWCoincidence(fineData)
 }
-
