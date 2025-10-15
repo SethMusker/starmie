@@ -69,6 +69,7 @@ clumpp_future<-function (Q_list, method = "greedy", iter = 100)
   else if (method == "stephens") {
     Q_list <- getStephens(Q_list)
   }
+  plan(sequential)
   return(Q_list)
   # toc()
 }
@@ -76,4 +77,5 @@ clumpp_future<-function (Q_list, method = "greedy", iter = 100)
 G <- function(Q_1, Q_2){
   W <- matrix(1, nrow(Q_1), ncol(Q_1))/ncol(Q_1)
   1-norm(Q_1-Q_2, type="F")/sqrt(norm(Q_1-W, type="F")*norm(Q_2-W, type="F"))
+
 }
